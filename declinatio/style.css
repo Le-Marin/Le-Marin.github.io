@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,500;0,700;1,500;1,700&display=swap");
+@charset "utf-8";
+
+:root {
+  --font-special: "Ysabeau Infant", Arial, "Helvetica Neue", Helvetica, sans-serif;
+  --font-serif: "Times New Roman", Times, serif;
+  --font-monospace: Consolas, monospace;
+  font-size: 0.625rem;
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: var(--font-special);
+  font-size: 1.8rem;
+  min-width: 50rem;
+  color: #222;
+  background-color: white;
+  overflow-x: hidden;
+}
+#root {
+  max-width: 80rem;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: 0 auto;
+}
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-bottom: 1px solid #bbb;
+}
+.select {
+  column-gap: .4em;
+}
+select {
+  font: inherit;
+}
+button {
+  font: inherit;
+}
+.words {
+  column-gap: 2em;
+}
+.table {
+  flex-direction: column;
+}
+.row {
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+  padding: .25em 0;
+}
+.cell {
+  width: 9em;
+  position: relative;
+}
+.cell:first-child {
+  font-weight: bold;
+  width: 6em;
+  margin-left: -8em;
+}
+.cell.th {
+  font-family: var(--font-serif);
+  font-weight: bold;
+  text-align: center;
+}
+.cell[data-valid]::after {
+  content: "✗";
+  font-family: Arial, sans-serif;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-align: center;
+  width: 2.4rem;
+  line-height: 1.6;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #a82e2e;
+}
+.cell[data-valid="1"]::after {
+  content: "✓";
+  color: #25a825;
+}
+.input {
+  font-family: var(--font-monospace);
+  font-size: .8em;
+  width: 100%;
+  padding: .25em;
+  padding-right: 2.4rem;
+  background-color: #fff;
+  border: 0 solid #aaa;
+  border-bottom-width: 1px;
+  outline: none;
+  box-shadow: none;
+}
+.input:focus {
+  border-bottom-color: royalblue;
+}
+.buttons {
+  column-gap: 1em;
+}
+.result > .row:first-child {
+  display: none;
+}
+.result .cell:first-child {
+  visibility: hidden;
+}
+.result .input {
+  font-family: var(--font-serif);
+  font-size: 1em;
+  border-bottom: none;
+}
