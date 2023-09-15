@@ -35,16 +35,16 @@
   btnGet.addEventListener('click', function get() {
     const declension = +select.value || 1 + Math.random() * 5 >> 0;
     const search = ([d]) => d === declension;
-    currentWord = vocabulary.find(data => !data[6] && search(data));
+    currentWord = vocabulary.find(data => !data[5] && search(data));
 
     if (!currentWord) {
-      vocabulary.filter(search).forEach(data => data[6] = false);
+      vocabulary.filter(search).forEach(data => data[5] = false);
       vocabulary.sort(() => Math.random() - 0.5);
       return get();
     }
 
-    currentWord[6] = true;
-    words[1].textContent = currentWord[2];
+    currentWord[5] = true;
+    words[1].innerHTML = currentWord[2];
     words[0].innerHTML = currentWord[1]
       .replace(/ (f|m|n|pl|mf|mfn)$/, ' <b>$1</b>');
 
@@ -61,7 +61,8 @@
     if (!currentWord) return;
 
     inputs.forEach((el, i) => {
-      const isValid = el.value.toLowerCase() === getWordForm(i).toLowerCase();
+      const value = getWordForm(i).replace('_', '');
+      const isValid = el.value.toLowerCase() === value.toLowerCase();
       el.parentNode.dataset.valid = +isValid;
     });
   });
@@ -75,10 +76,7 @@
     if (!currentWord) return;
 
     inputs2.forEach((el, i) => {
-      const root = currentWord[5];
-      el.innerHTML = root
-        ? `${root}<b>${getWordForm(i).slice(root.length)}</b>`
-        : getWordForm(i);
+      el.innerHTML = getWordForm(i).replace(/_(.+)/, '<b>$1</b>');
     });
 
     table.parentNode.appendChild(table2);
