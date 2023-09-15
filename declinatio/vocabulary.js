@@ -1,55 +1,55 @@
 const VOCABULARY = [
-  , '1 | opera -ae f | work; effort / работа; усилие | opera operae operae operam operā opera | operae operārum operīs operās operīs operae'
-  , '1 | alauda -ae f | lark / жаворонок | alauda alaudae alaudae alaudam alaudā alauda | alaudae alaudārum alaudīs alaudās alaudīs alaudae'
-  , '1 | tragoedia -ae f | tragedy / трагедия | tragoedia tragoediae tragoediae tragoediam tragoediā tragoedia | tragoediae tragoediārum tragoediīs tragoediās tragoediīs tragoediae'
-  , '1 | fāma -ae f | talk, rumour / молва, слух | fāma fāmae fāmae fāmam fāmā fāma | fāmae fāmārum fāmīs fāmās fāmīs fāmae'
-  , '1 | rota -ae f | wheel / колесо | rota rotae rotae rotam rotā rota | rotae rotārum rotīs rotās rotīs rotae'
-  , '1 | stēlla -ae f | star / звезда | stēlla stēllae stēllae stēllam stēllā stēlla | stēllae stēllārum stēllīs stēllās stēllīs stēllae'
-  , '1 | umbra -ae f | shadow / тень | umbra umbrae umbrae umbram umbrā umbra | umbrae umbrārum umbrīs umbrās umbrīs umbrae'
-  , '1 | scientia -ae f | knowledge / знание | scientia scientiae scientiae scientiam scientiā scientia | scientiae scientiārum scientiīs scientiās scientiīs scientiae'
-  , '1 | convīva -ae m | guest, table companion / гость, сотрапезник | convīva convīvae convīvae convīvam convīvā convīva | convīvae convīvārum convīvīs convīvās convīvīs convīvae'
-  , '1 | pīrāta -ae m | pirate / пират | pīrāta pīrātae pīrātae pīrātam pīrātā pīrāta | pīrātae pīrātārum pīrātīs pīrātās pīrātīs pīrātae'
-  , '2 | tympanum -ī n | drum, timbrel / барабан, тимпан | tympanum tympanī tympanō tympanum tympanō tympanum | tympana tympanōrum tympanīs tympana tympanīs tympana'
-  , '2 | sagum -ī n | cloak / плащ | sagum sagī sagō sagum sagō sagum | saga sagōrum sagīs saga sagīs saga'
-  , '2 | rēgnum -ī n | kingdom / королевство | rēgnum rēgnī rēgnō rēgnum rēgnō rēgnum | rēgna rēgnōrum rēgnīs rēgna rēgnīs rēgna'
-  , '2 | furnus -ī m | oven / печь | furnus furnī furnō furnum furnō furne | furnī furnōrum furnīs furnōs furnīs furnī'
-  , '2 | cervus -ī m | deer, stag / олень | cervus cervī cervō cervum cervō cerve | cervī cervōrum cervīs cervōs cervīs cervī'
-  , '2 | fīlius -ī m | son / сын | fīlius fīliī fīliō fīlium fīliō fīlī | fīliī fīliōrum fīliīs fīliōs fīliīs fīliī'
-  , '2 | sorbus -ī f | sorb, rowan / рябина | sorbus sorbī sorbō sorbum sorbō sorbe | sorbī sorbōrum sorbīs sorbōs sorbīs sorbī'
-  , '2 | aper -prī m | wild boar / кабан | aper aprī aprō aprum aprō aper | aprī aprōrum aprīs aprōs aprīs aprī'
-  , '2 | gener -erī m | son-in-law / зять | gener generī generō generum generō generī | generī generōrum generīs generōs generīs generī'
-  , '2 | vir -ī m | man / мужчина | vir virī virō virum virō virī | virī virōrum virīs virōs virīs virī'
-  , '3 | urbs urbis f | city / город | urbs urbis urbī urbem urbe urbs | urbēs urbium urbibus urbēs urbibus urbēs'
-  , '3 | regiō -ōnis f | region / регион, край | regiō regiōnis regiōnī regiōnem regiōne regiōnis | regiōnēs regiōnum regiōnibus regiōnēs regiōnibus regiōnēs'
-  , '3 | calamitās -ātis f | calamity / бедствие | calamitās calamitātis calamitātī calamitātem calamitāte calamitātis | calamitātēs calamitātum calamitātibus calamitātēs calamitātibus calamitātēs'
-  , '3 | carmen -inis n | song / песня | carmen carminis carminī carmen carmine carmen | carmina carminum carminibus carmina carminibus carmina'
-  , '3 | hostis -is m | enemy / враг | hostis hostis hostī hostem hoste hostis | hostēs hostium hostibus hostēs hostibus hostēs'
-  , '3 | pāx -ācis f | peace / мир | pāx pācis pācī pācem pāce pāx | pācēs pācium pācibus pācēs pācibus pācēs'
-  , '3 | lēx lēgis f | law / закон | lēx lēgis lēgī lēgem lēge lēx | lēgēs lēgum lēgibus lēgēs lēgibus lēgēs'
-  , '3 | onus -eris n | burden / бремя | onus oneris onerī onus onere onus | onera onerum oneribus onera oneribus onera'
-  , '3 | vectīgal -ālis n | tax / налог | vectīgal vectīgālis vectīgālī vectīgāle vectīgal | vectīgālia vectīgālium vectīgālibus vectīgālia vectīgālibus vectīgālia'
-  , '3 | sapō -ōnis m | soap / мыло | sapō sapōnis sapōnī sapōnem sapōnē sapō | sapōnēs sapōnum sapōnibus sapōnēs sapōnibus sapōnēs'
-  , '4 | currus -ūs m | chariot / колесница | currus currūs curruī currum currū currus | currūs curruum curribus currūs curribus currūs'
-  , '4 | cāsus -ūs m | falling / падение | cāsus cāsūs cāsuī cāsum cāsū cāsus | cāsūs cāsuum cāsibus cāsūs cāsibus cāsūs'
-  , '4 | sēnsus -ūs m | sense / чувство | sēnsus sēnsūs sēnsuī sēnsum sēnsū sēnsus | sēnsūs sēnsuum sēnsibus sēnsūs sēnsibus sēnsūs'
-  , '4 | gradus -ūs m | step / шаг | gradus gradūs graduī gradum gradū gradus | gradūs graduum gradibus gradūs gradibus gradūs'
-  , '4 | lacus -ūs m | lake / озеро | lacus lacūs lacuī lacum lacū lacus | lacūs lacuum lacibus lacūs lacibus lacūs'
-  , '4 | manus -ūs f | hand / рука | manus manūs manuī manum manū manus | manūs manuum manibus manūs manibus manūs'
-  , '4 | nurus nurūs f | daughter-in-law / невестка | nurus nurūs nuruī nurum nurū nurus | nurūs nuruum nuribus nurūs nuribus nurūs'
-  , '4 | genū -ūs n | knee / колено | genū genūs genū genū genū genūs | genūs genuum genibus genūs genibus genūs'
-  , '4 | verū -ūs n | spit, broach / вертел | verū verūs verū verū verū verū | verua veruum veribus verua veribus verua'
-  , '4 | cornū -ūs n | horn / рог | cornū cornūs cornū cornū cornū cornū | cornua cornuum cornibus cornua cornibus cornua'
-  , '5 | seriēs -ēī f | row, series / ряд, вереница | seriēs seriēī seriēī seriem seriē seriēs | seriēs seriērum seriēbus seriēs seriēbus seriēs'
-  , '5 | faciēs -ēī f | face / лицо | faciēs faciēī faciēī faciem faciē faciēs | faciēs faciērum faciēbus faciēs faciēbus faciēs'
-  , '5 | rēs reī f | thing; matter / вещь; дело | rēs reī reī rem rē rēs | rēs rērum rēbus rēs rēbus rēs'
-  , '5 | diēs -ēī mf | day / день | diēs diēī diēī diem diē diēs | diēs diērum diēbus diēs diēbus diēs'
-  , '5 | merīdiēs -ēī m | noon / полдень | merīdiēs merīdiēī merīdiēī merīdiem merīdiē merīdiēs | merīdiēs merīdiērum merīdiēbus merīdiēs merīdiēbus merīdiēs'
-  , '5 | speciēs -ēī f | look / взгляд | speciēs speciēī speciēī speciem speciē speciēs | speciēs speciērum speciēbus speciēs speciēbus speciēs'
-  , '5 | fidēs -eī f | trust, faith / вера, доверие | fidēs fideī fideī fidem fidē fidēs | fidēs fidērum fidēbus fidēs fidēbus fidēs'
-  , '5 | spēs -eī f | hope / надежда | spēs speī speī spem spē speī | spēs spērum spēbus spēs spēbus spēs'
-  , '5 | aciēs -ēī f | sharp edge / остриё | aciēs aciēī aciēī aciem aciē aciēs | aciēs aciērum aciēbus aciēs aciēbus aciēs'
-  , '5 | glaciēs -ēī f | ice / лёд | glaciēs glaciēī glaciēī glaciem glaciē glaciēs | glaciēs glaciērum glaciēbus glaciēs glaciēbus glaciēs'
-].slice(1).map((str) => {
+  '1 | opera -ae f | work; effort / работа; усилие | opera, operae, operae, operam, operā, opera | operae, operārum, operīs, operās, operīs, operae | oper',
+  '1 | alauda -ae f | lark / жаворонок | alauda, alaudae, alaudae, alaudam, alaudā, alauda | alaudae, alaudārum, alaudīs, alaudās, alaudīs, alaudae | alaud',
+  '1 | tragoedia -ae f | tragedy / трагедия | tragoedia, tragoediae, tragoediae, tragoediam, tragoediā, tragoedia | tragoediae, tragoediārum, tragoediīs, tragoediās, tragoediīs, tragoediae | tragoedi',
+  '1 | fāma -ae f | talk, rumour / молва, слух | fāma, fāmae, fāmae, fāmam, fāmā, fāma | fāmae, fāmārum, fāmīs, fāmās, fāmīs, fāmae | fām',
+  '1 | rota -ae f | wheel / колесо | rota, rotae, rotae, rotam, rotā, rota | rotae, rotārum, rotīs, rotās, rotīs, rotae | rot',
+  '1 | stēlla -ae f | star / звезда | stēlla, stēllae, stēllae, stēllam, stēllā, stēlla | stēllae, stēllārum, stēllīs, stēllās, stēllīs, stēllae | stēll',
+  '1 | umbra -ae f | shadow / тень | umbra, umbrae, umbrae, umbram, umbrā, umbra | umbrae, umbrārum, umbrīs, umbrās, umbrīs, umbrae | umbr',
+  '1 | scientia -ae f | knowledge / знание | scientia, scientiae, scientiae, scientiam, scientiā, scientia | scientiae, scientiārum, scientiīs, scientiās, scientiīs, scientiae | scienti',
+  '1 | convīva -ae m | guest, table companion / гость, сотрапезник | convīva, convīvae, convīvae, convīvam, convīvā, convīva | convīvae, convīvārum, convīvīs, convīvās, convīvīs, convīvae | convīv',
+  '1 | pīrāta -ae m | pirate / пират | pīrāta, pīrātae, pīrātae, pīrātam, pīrātā, pīrāta | pīrātae, pīrātārum, pīrātīs, pīrātās, pīrātīs, pīrātae | pīrāt',
+  '2 | tympanum -ī n | drum, timbrel / барабан, тимпан | tympanum, tympanī, tympanō, tympanum, tympanō, tympanum | tympana, tympanōrum, tympanīs, tympana, tympanīs, tympana | tympan',
+  '2 | sagum -ī n | cloak / плащ | sagum, sagī, sagō, sagum, sagō, sagum | saga, sagōrum, sagīs, saga, sagīs, saga | sag',
+  '2 | rēgnum -ī n | kingdom / королевство | rēgnum, rēgnī, rēgnō, rēgnum, rēgnō, rēgnum | rēgna, rēgnōrum, rēgnīs, rēgna, rēgnīs, rēgna | rēgn',
+  '2 | furnus -ī m | oven / печь | furnus, furnī, furnō, furnum, furnō, furne | furnī, furnōrum, furnīs, furnōs, furnīs, furnī | furn',
+  '2 | cervus -ī m | deer, stag / олень | cervus, cervī, cervō, cervum, cervō, cerve | cervī, cervōrum, cervīs, cervōs, cervīs, cervī | cerv',
+  '2 | fīlius -ī m | son / сын | fīlius, fīliī, fīliō, fīlium, fīliō, fīlī | fīliī, fīliōrum, fīliīs, fīliōs, fīliīs, fīliī |',
+  '2 | sorbus -ī f | sorb, rowan / рябина | sorbus, sorbī, sorbō, sorbum, sorbō, sorbe | sorbī, sorbōrum, sorbīs, sorbōs, sorbīs, sorbī | sorb',
+  '2 | aper -prī m | wild boar / кабан | aper, aprī, aprō, aprum, aprō, aper | aprī, aprōrum, aprīs, aprōs, aprīs, aprī |',
+  '2 | gener -erī m | son-in-law / зять | gener, generī, generō, generum, generō, generī | generī, generōrum, generīs, generōs, generīs, generī | gener',
+  '2 | vir -ī m | man / мужчина | vir, virī, virō, virum, virō, virī | virī, virōrum, virīs, virōs, virīs, virī | vir',
+  '3 | urbs urbis f | city / город | urbs, urbis, urbī, urbem, urbe, urbs | urbēs, urbium, urbibus, urbēs, urbibus, urbēs |',
+  '3 | regiō -ōnis f | region / регион, край | regiō, regiōnis, regiōnī, regiōnem, regiōne, regiōnis | regiōnēs, regiōnum, regiōnibus, regiōnēs, regiōnibus, regiōnēs |',
+  '3 | calamitās -ātis f | calamity / бедствие | calamitās, calamitātis, calamitātī, calamitātem, calamitāte, calamitās | calamitātēs, calamitātum, calamitātibus, calamitātēs, calamitātibus, calamitātēs |',
+  '3 | carmen -inis n | song / песня | carmen, carminis, carminī, carmen, carmine, carmen | carmina, carminum, carminibus, carmina, carminibus, carmina |',
+  '3 | hostis -is m | enemy / враг | hostis, hostis, hostī, hostem, hoste, hostis | hostēs, hostium, hostibus, hostēs, hostibus, hostēs |',
+  '3 | pāx -ācis f | peace / мир | pāx, pācis, pācī, pācem, pāce, pāx | pācēs, pācium, pācibus, pācēs, pācibus, pācēs |',
+  '3 | lēx lēgis f | law / закон | lēx, lēgis, lēgī, lēgem, lēge, lēx | lēgēs, lēgum, lēgibus, lēgēs, lēgibus, lēgēs |',
+  '3 | onus -eris n | burden / бремя | onus, oneris, onerī, onus, onere, onus | onera, onerum, oneribus, onera, oneribus, onera |',
+  '3 | vectīgal -ālis n | tax / налог | vectīgal, vectīgālis, vectīgālī, vectīgāle, vectīgal | vectīgālia, vectīgālium, vectīgālibus, vectīgālia, vectīgālibus, vectīgālia |',
+  '3 | sapō -ōnis m | soap / мыло | sapō, sapōnis, sapōnī, sapōnem, sapōnē, sapō | sapōnēs, sapōnum, sapōnibus, sapōnēs, sapōnibus, sapōnēs |',
+  '4 | currus -ūs m | chariot / колесница | currus, currūs, curruī, currum, currū, currus | currūs, curruum, curribus, currūs, curribus, currūs | curr',
+  '4 | cāsus -ūs m | falling / падение | cāsus, cāsūs, cāsuī, cāsum, cāsū, cāsus | cāsūs, cāsuum, cāsibus, cāsūs, cāsibus, cāsūs | cās',
+  '4 | sēnsus -ūs m | sense / чувство | sēnsus, sēnsūs, sēnsuī, sēnsum, sēnsū, sēnsus | sēnsūs, sēnsuum, sēnsibus, sēnsūs, sēnsibus, sēnsūs | sēns',
+  '4 | gradus -ūs m | step / шаг | gradus, gradūs, graduī, gradum, gradū, gradus | gradūs, graduum, gradibus, gradūs, gradibus, gradūs | grad',
+  '4 | lacus -ūs m | lake / озеро | lacus, lacūs, lacuī, lacum, lacū, lacus | lacūs, lacuum, lacibus, lacūs, lacibus, lacūs | lac',
+  '4 | manus -ūs f | hand / рука | manus, manūs, manuī, manum, manū, manus | manūs, manuum, manibus, manūs, manibus, manūs | man',
+  '4 | nurus nurūs f | daughter-in-law / невестка | nurus, nurūs, nuruī, nurum, nurū, nurus | nurūs, nuruum, nuribus, nurūs, nuribus, nurūs | nur',
+  '4 | genū -ūs n | knee / колено | genū, genūs, genū, genū, genū, genūs | genūs, genuum, genibus, genūs, genibus, genūs | gen',
+  '4 | verū -ūs n | spit, broach / вертел | verū, verūs, verū, verū, verū, verū | verua, veruum, veribus, verua, veribus, verua | ver',
+  '4 | cornū -ūs n | horn / рог | cornū, cornūs, cornū, cornū, cornū, cornū | cornua, cornuum, cornibus, cornua, cornibus, cornua | corn',
+  '5 | seriēs -ēī f | row, series / ряд, вереница | seriēs, seriēī, seriēī, seriem, seriē, seriēs | seriēs, seriērum, seriēbus, seriēs, seriēbus, seriēs | seri',
+  '5 | faciēs -ēī f | face / лицо | faciēs, faciēī, faciēī, faciem, faciē, faciēs | faciēs, faciērum, faciēbus, faciēs, faciēbus, faciēs | faci',
+  '5 | rēs reī f | thing; matter / вещь; дело | rēs, reī, reī, rem, rē, rēs | rēs, rērum, rēbus, rēs, rēbus, rēs | r',
+  '5 | diēs -ēī mf | day / день | diēs, diēī, diēī, diem, diē, diēs | diēs, diērum, diēbus, diēs, diēbus, diēs | di',
+  '5 | merīdiēs -ēī m | noon / полдень | merīdiēs, merīdiēī, merīdiēī, merīdiem, merīdiē, merīdiēs | merīdiēs, merīdiērum, merīdiēbus, merīdiēs, merīdiēbus, merīdiēs | merīdi',
+  '5 | speciēs -ēī f | look / взгляд | speciēs, speciēī, speciēī, speciem, speciē, speciēs | speciēs, speciērum, speciēbus, speciēs, speciēbus, speciēs | speci',
+  '5 | fidēs -eī f | trust, faith / вера, доверие | fidēs, fideī, fideī, fidem, fidē, fidēs | fidēs, fidērum, fidēbus, fidēs, fidēbus, fidēs | fid',
+  '5 | spēs -eī f | hope / надежда | spēs, speī, speī, spem, spē, speī | spēs, spērum, spēbus, spēs, spēbus, spēs | sp',
+  '5 | aciēs -ēī f | sharp edge / остриё | aciēs, aciēī, aciēī, aciem, aciē, aciēs | aciēs, aciērum, aciēbus, aciēs, aciēbus, aciēs | aci',
+  '5 | glaciēs -ēī f | ice / лёд | glaciēs, glaciēī, glaciēī, glaciem, glaciē, glaciēs | glaciēs, glaciērum, glaciēbus, glaciēs, glaciēbus, glaciēs | glaci',
+].map((str) => {
   const chunks = str.split('|').map((chunk) => chunk.trim());
-  return [+chunks[0], chunks[1], chunks[2], chunks[3].split(' '), chunks[4].split(' '), false];
+  return [+chunks[0], chunks[1], chunks[2], chunks[3].split(', '), chunks[4].split(', '), chunks[5], false];
 }).sort(() => Math.random() - 0.5);
