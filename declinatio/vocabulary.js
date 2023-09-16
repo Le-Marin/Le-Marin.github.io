@@ -349,4 +349,4 @@ const VOCABULARY = [
     ['glaci_ēs', 'glaci_ēī', 'glaci_ēī', 'glaci_em', 'glaci_ē', 'glaci_ēs'],
     ['glaci_ēs', 'glaci_ērum', 'glaci_ēbus', 'glaci_ēs', 'glaci_ēbus', 'glaci_ēs']
   ],
-].sort(() => Math.random() - 0.5);
+];
