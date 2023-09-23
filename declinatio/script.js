@@ -3,6 +3,7 @@
 
   const sort = (array) => array.sort(() => Math.random() - 0.5);
   const vocabulary = sort(VOCABULARY.splice(0));
+  vocabulary.forEach((that) => that.unshift(false));
 
   [...document.scripts].forEach((el) => el.remove());
 
@@ -10,6 +11,7 @@
   const $$ = (selector, ctx = document) => [...ctx.querySelectorAll(selector)];
 
   const select = $('select');
+  const selectLen = select.options.length;
   const btnGet = $('.get');
   const btnCheck = $('.check');
   const btnAnswers = btnCheck.nextElementSibling;
@@ -22,7 +24,7 @@
   let currentWord = null;
   let isAnswersShown = false;
 
-  const getInflection = (ind) => currentWord[3 + ind / 6 >> 0][ind % 6];
+  const getInflection = (ind) => currentWord[4 + ind / 6 >> 0][ind % 6] || '';
 
   table2.classList.add('result');
   inputs2.forEach((el, i) => {
@@ -33,23 +35,32 @@
   });
 
   btnGet.addEventListener('click', function get() {
-    const declension = +select.value || 1 + Math.random() * 5 >> 0;
-    const test = ([d]) => d === declension;
-    currentWord = vocabulary.find(data => !data[5] && test(data));
+    const declension = +select.value || 1 + Math.random() * selectLen >> 0;
+    const test = (that) => that[1] === declension;
+    currentWord = vocabulary.find(data => !data[0] && test(data));
 
     if (!currentWord) {
       if (+select.value) return rearrangeDeclension(test, get);
       return handleRandomNull(get);
     }
 
-    currentWord[5] = true;
+    currentWord[0] = true;
     fillWords();
 
     inputs.forEach((el) => {
       el.value = '';
+      el.disabled = false;
+      el.parentNode.removeAttribute('data-none');
       el.parentNode.removeAttribute('data-valid');
     });
 
+    if (declension === 6) {
+      [inputs[5], inputs[11]].forEach(setNoValue);
+    } else if (declension === 7 && !currentWord[4].length) {
+      inputs.slice(0, 6).forEach(setNoValue);
+    }
+
+    table2.classList.toggle('no-vocative', declension === 6);
     table2.remove();
     isAnswersShown = false;
 
@@ -57,9 +68,9 @@
   });
 
   function handleRandomNull(callback) {
-    if (vocabulary.find(data => !data[5])) return callback();
+    if (vocabulary.find(data => !data[0])) return callback();
 
-    sort(vocabulary).forEach((data) => data[5] = false);
+    sort(vocabulary).forEach((data) => data[0] = false);
     callback();
   }
 
@@ -69,7 +80,7 @@
     [...vocabulary].forEach((data, i) => {
       if (!predicate(data)) return;
 
-      data[5] = false;
+      data[0] = false;
       vocabulary.splice(i - extracts.push(data) + 1, 1);
     });
 
@@ -79,16 +90,23 @@
 
   function fillWords() {
     const reGen = / (f|m|n|pl|mf|mfn)$/;
-    words[0].innerHTML = currentWord[1].replace(reGen, ' <b>$1</b>');
-    words[1].innerHTML = currentWord[2];
+    words[0].innerHTML = currentWord[2].replace(reGen, ' <b>$1</b>');
+    words[1].innerHTML = currentWord[3];
+  }
+
+  function setNoValue(el) {
+    el.value = '\u2716';
+    el.disabled = true;
+    el.parentNode.dataset.none = 1;
   }
 
   btnCheck.addEventListener('click', function() {
     if (!currentWord) return;
 
     inputs.forEach((el, i) => {
-      const value = getInflection(i).replace('_', '');
-      const isValid = el.value.toLowerCase() === value.toLowerCase();
+      const userValue = el.value.trim().toLowerCase();
+      const value = getInflection(i).replaceAll('_', '').toLowerCase();
+      const isValid = value.split('/').some(x => x === userValue);
       el.parentNode.dataset.valid = +isValid;
     });
   });
@@ -103,7 +121,7 @@
     if (!currentWord) return;
 
     inputs2.forEach((el, i) => {
-      el.innerHTML = getInflection(i).replace(/_(.+)/, '<b>$1</b>');
+      el.innerHTML = getInflection(i).replace(/_([^/]+)/g, '<b>$1</b>');
     });
 
     table.parentNode.appendChild(table2);
