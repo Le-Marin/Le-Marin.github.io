@@ -33,7 +33,7 @@ body::before {
   opacity: 0.125;
 }
 #root {
-  max-width: 55rem;
+  max-width: 60rem;
   min-height: 100vh;
   position: relative;
   padding: 1rem;
@@ -73,16 +73,15 @@ button {
   padding-bottom: 1em;
 }
 .col {
-  width: 9em;
+  flex: 1 1 auto;
 }
 .col:first-child {
   font-weight: bold;
-  width: 6em;
-  min-width: 5.5em;
-  margin-right: auto;
+  min-width: 6em;
 }
 .row {
   height: 1.5em;
+  min-height: 1.5em;
   display: flex;
   align-items: center;
   position: relative;
@@ -136,8 +135,14 @@ button {
 .buttons {
   column-gap: 0.75em;
 }
+.result {
+  align-items: stretch;
+}
 .result .col:first-child {
   visibility: hidden;
+}
+.result .row {
+  height: auto;
 }
 .result .row:first-child,
 .result.no-vocative .row:last-child {
@@ -218,5 +223,11 @@ div.input {
   }
   .keyboard__key {
     margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 31.25rem) {
+  .result .col:first-child {
+    display: none;
   }
 }

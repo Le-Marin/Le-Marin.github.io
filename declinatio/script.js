@@ -20,6 +20,7 @@
   const table2 = table.cloneNode(true);
   const inputs = $$('.input', table);
   const inputs2 = $$('.input', table2);
+  const fields = [inputs.slice(0, 6), inputs.slice(6)];
 
   let currentWord = null;
   let isAnswersShown = false;
@@ -48,19 +49,14 @@
     fillWords();
 
     inputs.forEach((el) => {
-      el.value = '';
-      el.disabled = false;
-      el.parentNode.removeAttribute('data-none');
+      setNoValue(el);
       el.parentNode.removeAttribute('data-valid');
     });
 
-    if (declension === 6) {
-      [inputs[5], inputs[11]].forEach(setNoValue);
-    } else if (declension === 7 && !currentWord[4].length) {
-      inputs.slice(0, 6).forEach(setNoValue);
-    }
+    currentWord[4].forEach((x, i) => clearValue(fields[0][i]));
+    currentWord[5].forEach((x, i) => clearValue(fields[1][i]));
 
-    table2.classList.toggle('no-vocative', declension === 6);
+    table2.classList.toggle('no-vocative', currentWord[4].length < 6);
     table2.remove();
     isAnswersShown = false;
 
@@ -100,6 +96,12 @@
     el.parentNode.dataset.none = 1;
   }
 
+  function clearValue(el) {
+    el.value = '';
+    el.disabled = false;
+    el.parentNode.removeAttribute('data-none');
+  }
+
   btnCheck.addEventListener('click', function() {
     if (!currentWord) return;
 
@@ -121,7 +123,7 @@
     if (!currentWord) return;
 
     inputs2.forEach((el, i) => {
-      el.innerHTML = getInflection(i).replace(/_([^/]+)/g, '<b>$1</b>');
+      el.innerHTML = getInflection(i).replace(/_([^ /]+)/g, '<b>$1</b>');
     });
 
     table.parentNode.appendChild(table2);
