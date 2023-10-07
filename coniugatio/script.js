@@ -11,7 +11,12 @@
   const $$ = (selector, ctx = document) => [...ctx.querySelectorAll(selector)];
 
   const select = $('select');
-  const selectLen = select.options.length;
+  const presentValues = new Set(vocabulary.map((arr) => arr[1]));
+
+  [...select.options].forEach((el) => {
+    el.disabled = !presentValues.has(+el.value);
+  });
+
   const btnGet = $('.get');
   const btnCheck = $('.check');
   const btnAnswers = btnCheck.nextElementSibling;
@@ -20,12 +25,13 @@
   const table2 = table.cloneNode(true);
   const inputs = $$('.input', table);
   const inputs2 = $$('.input', table2);
-  const fields = [inputs.slice(0, 3), inputs.slice(3)];
+  const qnt = inputs.length / 2;
+  const fields = [inputs.slice(0, qnt), inputs.slice(qnt)];
 
   let currentWord = null;
   let isAnswersShown = false;
 
-  const getInflection = (ind) => currentWord[4 + ind / 3 >> 0][ind % 3] || '';
+  const getInflection = (ind) => currentWord[4 + ind / qnt >> 0][ind % qnt] || '';
 
   table2.classList.add('result');
   inputs2.forEach((el, i) => {
@@ -36,8 +42,8 @@
   });
 
   btnGet.addEventListener('click', function get() {
-    const declension = +select.value;
-    const test = (that) => that[1] === declension;
+    const value = +select.value;
+    const test = (that) => that[1] === value;
     currentWord = vocabulary.find(data => !data[0] && test(data));
 
     if (!currentWord) return rearrangeDeclension(test, get);
@@ -74,8 +80,8 @@
   }
 
   function fillWords() {
-    const reGen = / (f|m|n|pl|mf|mfn)$/;
-    words[0].innerHTML = currentWord[2].replace(reGen, ' <b>$1</b>');
+    // const reGen = / (f|m|n|pl|mf|mfn)$/;
+    words[0].innerHTML = currentWord[2]; //.replace(reGen, ' <b>$1</b>');
     words[1].innerHTML = currentWord[3];
   }
 

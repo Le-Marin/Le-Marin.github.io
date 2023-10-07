@@ -348,4 +348,5 @@ const VOCABULARY = [
     'smear / смазывать',
     ['lini_or', 'linī_ris', 'linī_tur'],
     ['linī_mur', 'linī_minī', 'liniu_ntur'],
+  ],
 ];
