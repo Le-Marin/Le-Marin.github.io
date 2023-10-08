@@ -84,8 +84,8 @@
   }
 
   function fillWords() {
-    words[0].innerHTML = currentWord[2];
-    words[1].innerHTML = currentWord[3];
+    words[0].innerHTML = currentWord[3];
+    words[1].innerHTML = currentWord[4];
   }
 
   function setNoValue(el) {
