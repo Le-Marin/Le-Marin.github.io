@@ -203,7 +203,7 @@ div.input {
   background-color: #505b7c;
 }
 
-@media screen and (max-width: 39.75rem) {
+@media screen and (max-width: 43rem) {
   .keyboard {
     position: static;
     display: flex;

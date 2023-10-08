@@ -1,6 +1,7 @@
 const VOCABULARY = [
   [
     1,
+    'I',
     'amō -āvī -ātum -āre',
     'love / любить',
     ['am_ō', 'amā_s', 'ama_t'],
@@ -8,6 +9,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'clāmō -āvī -ātum -āre',
     'cry, shout / кричать',
     ['clām_ō', 'clāmā_s', 'clāma_t'],
@@ -15,6 +17,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'rogō -āvī -ātum -āre',
     'ask / спрашивать',
     ['rog_ō', 'rogā_s', 'roga_t'],
@@ -22,6 +25,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'levō -āvī -ātum -āre',
     'elevate / поднимать, повышать',
     ['lev_ō', 'levā_s', 'leva_t'],
@@ -29,6 +33,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'iterō -āvī -ātum -āre',
     'repeat / повторять',
     ['iter_ō', 'iterā_s', 'itera_t'],
@@ -36,6 +41,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'aedificō -āvī -ātum -āre',
     'build / строить',
     ['aedific_ō', 'aedificā_s', 'aedifica_t'],
@@ -43,6 +49,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'vocō -āvī -ātum -āre',
     'call / звать',
     ['voc_ō', 'vocā_s', 'voca_t'],
@@ -50,6 +57,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'cantō -āvī -ātum -āre',
     'sing / петь',
     ['cant_ō', 'cantā_s', 'canta_t'],
@@ -57,6 +65,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'numerō -āvī -ātum -āre',
     'count / считать',
     ['numer_ō', 'numerā_s', 'numera_t'],
@@ -64,6 +73,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'I',
     'salūtō -āvī -ātum -āre',
     'greet / приветствовать',
     ['salūt_ō', 'salūtā_s', 'salūta_t'],
@@ -71,6 +81,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'videō vīdī vīsum -ēre',
     'see / видеть',
     ['vide_ō', 'vidē_s', 'vide_t'],
@@ -78,6 +89,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'respondeō -dī -sum -ēre',
     'answer / отвечать',
     ['responde_ō', 'respondē_s', 'responde_t'],
@@ -85,6 +97,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'habeō -uī -itum -ēre',
     'have / иметь',
     ['habe_ō', 'habē_s', 'habe_t'],
@@ -92,6 +105,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'teneō -uī -ntum -ēre',
     'hold / держать',
     ['tene_ō', 'tenē_s', 'tene_t'],
@@ -99,6 +113,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'tergeō -sī -sum -ēre',
     'wipe / протирать',
     ['terge_ō', 'tergē_s', 'terge_t'],
@@ -106,6 +121,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'moveō mōvī mōtum -ēre',
     'move / двигать',
     ['move_ō', 'movē_s', 'move_t'],
@@ -113,6 +129,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'torreō -uī -stum -ēre',
     'dry, parch / сушить, жечь',
     ['torre_ō', 'torrē_s', 'torre_t'],
@@ -120,6 +137,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'foveō fōvī fōtum -ēre',
     'keep warm / согревать',
     ['fove_ō', 'fovē_s', 'fove_t'],
@@ -127,6 +145,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'compleō vīdī vīsum -ēre',
     'fill up / заполнять',
     ['comple_ō', 'complē_s', 'comple_t'],
@@ -134,6 +153,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'II',
     'arceō vīdī vīsum -ēre',
     'hold off / (у, с)держивать',
     ['arce_ō', 'arcē_s', 'arce_t'],
@@ -141,41 +161,47 @@ const VOCABULARY = [
   ],
   [
     1,
-    'sūmō sūmpsī sūmptum -ēre',
+    'III a',
+    'sūmō sūmpsī sūmptum -ere',
     'take / брать',
     ['sūm_ō', 'sūmi_s', 'sūmi_t'],
     ['sūmi_mus', 'sūmi_tis', 'sūmu_nt'],
   ],
   [
     1,
-    'agō ēgī āctum -ēre',
+    'III a',
+    'agō ēgī āctum -ere',
     'do / делать',
     ['ag_ō', 'agi_s', 'agi_t'],
     ['agi_mus', 'agi_tis', 'agu_nt'],
   ],
   [
     1,
-    'vehō vēxī vectum -ēre',
+    'III a',
+    'vehō vēxī vectum -ere',
     'carry, convey / нести, везти',
     ['veh_ō', 'vehi_s', 'vehi_t'],
     ['vehi_mus', 'vehi_tis', 'vehu_nt'],
   ],
   [
     1,
-    'vertō -sī -sum -ēre',
+    'III a',
+    'vertō -sī -sum -ere',
     'turn / вертеть, поворачивать',
     ['vert_ō', 'verti_s', 'verti_t'],
     ['verti_mus', 'verti_tis', 'vertu_nt'],
   ],
   [
     1,
-    'emō ēmī ēmptum -ēre',
+    'III a',
+    'emō ēmī ēmptum -ere',
     'buy / покупать',
     ['em_ō', 'emi_s', 'emi_t'],
     ['emi_mus', 'emi_tis', 'emu_nt'],
   ],
   [
     1,
+    'IV',
     'audiō -īvī -ītum -īre',
     'hear; listen / слышать; слушать',
     ['audi_ō', 'audī_s', 'audi_t'],
@@ -183,6 +209,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'IV',
     'fīniō -īvī -ītum -īre',
     'limit / ограничивать',
     ['fīni_ō', 'fīnī_s', 'fīni_t'],
@@ -190,6 +217,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'IV',
     'molliō -īvī -ītum -īre',
     'soften / размягчать',
     ['molli_ō', 'mollī_s', 'molli_t'],
@@ -197,6 +225,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'IV',
     'poliō -īvī -ītum -īre',
     'polish / полировать',
     ['poli_ō', 'polī_s', 'poli_t'],
@@ -204,6 +233,7 @@ const VOCABULARY = [
   ],
   [
     1,
+    'IV',
     'liniō -īvī -ītum -īre',
     'smear / смазывать',
     ['lini_ō', 'linī_s', 'lini_t'],
@@ -211,6 +241,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'I',
     'amō -āvī -ātum -āre',
     'love / любить',
     ['am_or', 'amā_ris', 'amā_tur'],
@@ -218,6 +249,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'I',
     'clāmō -āvī -ātum -āre',
     'cry, shout / кричать',
     ['clām_or', 'clāmā_ris', 'clāmā_tur'],
@@ -225,6 +257,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'I',
     'rogō -āvī -ātum -āre',
     'ask / спрашивать',
     ['rog_or', 'rogā_ris', 'rogā_tur'],
@@ -232,6 +265,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'I',
     'levō -āvī -ātum -āre',
     'elevate / поднимать, повышать',
     ['lev_or', 'levā_ris', 'levā_tur'],
@@ -239,6 +273,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'I',
     'iterō -āvī -ātum -āre',
     'repeat / повторять',
     ['iter_or', 'iterā_ris', 'iterā_tur'],
@@ -246,6 +281,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'II',
     'videō vīdī vīsum -ēre',
     'see / видеть',
     ['vide_or', 'vidē_ris', 'vidē_tur'],
@@ -253,6 +289,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'II',
     'respondeō -dī -sum -ēre',
     'answer / отвечать',
     ['responde_or', 'respondē_ris', 'respondē_tur'],
@@ -260,6 +297,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'II',
     'habeō -uī -itum -ēre',
     'have / иметь',
     ['habe_or', 'habē_ris', 'habē_tur'],
@@ -267,6 +305,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'II',
     'teneō -uī -ntum -ēre',
     'hold / держать',
     ['tene_or', 'tenē_ris', 'tenē_tur'],
@@ -274,6 +313,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'II',
     'tergeō -sī -sum -ēre',
     'wipe / протирать',
     ['terge_or', 'tergē_ris', 'tergē_tur'],
@@ -281,41 +321,47 @@ const VOCABULARY = [
   ],
   [
     2,
-    'sūmō sūmpsī sūmptum -ēre',
+    'III a',
+    'sūmō sūmpsī sūmptum -ere',
     'take / брать',
     ['sūm_or', 'sūme_ris', 'sūmi_tur'],
     ['sūmi_mur', 'sūmi_minī', 'sūmu_ntur'],
   ],
   [
     2,
-    'agō ēgī āctum -ēre',
+    'III a',
+    'agō ēgī āctum -ere',
     'do / делать',
     ['ag_or', 'age_ris', 'agi_tur'],
     ['agi_mur', 'agi_minī', 'agu_ntur'],
   ],
   [
     2,
-    'vehō vēxī vectum -ēre',
+    'III a',
+    'vehō vēxī vectum -ere',
     'carry, convey / нести, везти',
     ['veh_or', 'vehe_ris', 'vehi_tur'],
     ['vehi_mur', 'vehi_minī', 'vehu_ntur'],
   ],
   [
     2,
-    'vertō -sī -sum -ēre',
+    'III a',
+    'vertō -sī -sum -ere',
     'turn / вертеть, поворачивать',
     ['vert_or', 'verte_ris', 'verti_tur'],
     ['verti_mur', 'verti_minī', 'vertu_ntur'],
   ],
   [
     2,
-    'emō ēmī ēmptum -ēre',
+    'III a',
+    'emō ēmī ēmptum -ere',
     'buy / покупать',
     ['em_or', 'eme_ris', 'emi_tur'],
     ['emi_mur', 'emi_minī', 'emu_ntur'],
   ],
   [
     2,
+    'IV',
     'audiō -īvī -ītum -īre',
     'hear; listen / слышать; слушать',
     ['audi_or', 'audī_ris', 'audī_tur'],
@@ -323,6 +369,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'IV',
     'fīniō -īvī -ītum -īre',
     'limit / ограничивать',
     ['fīni_or', 'fīnī_ris', 'fīnī_tur'],
@@ -330,6 +377,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'IV',
     'molliō -īvī -ītum -īre',
     'soften / размягчать',
     ['molli_or', 'mollī_ris', 'mollī_tur'],
@@ -337,6 +385,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'IV',
     'poliō -īvī -ītum -īre',
     'polish / полировать',
     ['poli_or', 'polī_ris', 'polī_tur'],
@@ -344,6 +393,7 @@ const VOCABULARY = [
   ],
   [
     2,
+    'IV',
     'liniō -īvī -ītum -īre',
     'smear / смазывать',
     ['lini_or', 'linī_ris', 'linī_tur'],

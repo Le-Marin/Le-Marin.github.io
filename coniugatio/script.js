@@ -10,10 +10,11 @@
   const $ = (selector, ctx = document) => ctx.querySelector(selector);
   const $$ = (selector, ctx = document) => [...ctx.querySelectorAll(selector)];
 
-  const select = $('select');
+  const select1 = $('.select-conjugation');
+  const select2 = $('.select-tense');
   const presentValues = new Set(vocabulary.map((arr) => arr[1]));
 
-  [...select.options].forEach((el) => {
+  [...select2.options].forEach((el) => {
     el.disabled = !presentValues.has(+el.value);
   });
 
@@ -31,7 +32,7 @@
   let currentWord = null;
   let isAnswersShown = false;
 
-  const getInflection = (ind) => currentWord[4 + ind / qnt >> 0][ind % qnt] || '';
+  const getInflection = (i) => currentWord[5 + i / qnt >> 0][i % qnt] || '';
 
   table2.classList.add('result');
   inputs2.forEach((el, i) => {
@@ -42,11 +43,12 @@
   });
 
   btnGet.addEventListener('click', function get() {
-    const value = +select.value;
-    const test = (that) => that[1] === value;
+    const conjuration = select1.value;
+    const tense = +select2.value;
+    const test = (that) => that[1] === tense && that[2] === conjuration;
     currentWord = vocabulary.find(data => !data[0] && test(data));
 
-    if (!currentWord) return rearrangeDeclension(test, get);
+    if (!currentWord) return rearrange(test, get);
 
     currentWord[0] = true;
     fillWords();
@@ -56,8 +58,8 @@
       el.parentNode.removeAttribute('data-valid');
     });
 
-    currentWord[4].forEach((x, i) => clearValue(fields[0][i]));
-    currentWord[5].forEach((x, i) => clearValue(fields[1][i]));
+    currentWord[5].forEach((x, i) => clearValue(fields[0][i]));
+    currentWord[6].forEach((x, i) => clearValue(fields[1][i]));
 
     table2.remove();
     isAnswersShown = false;
@@ -65,7 +67,7 @@
     if (btnAnswers.textContent[0] !== 'R') btnAnswers.textContent = 'Mónstráre';
   });
 
-  function rearrangeDeclension(predicate, callback) {
+  function rearrange(predicate, callback) {
     const extracts = [];
 
     [...vocabulary].forEach((data, i) => {
@@ -75,13 +77,14 @@
       vocabulary.splice(i - extracts.push(data) + 1, 1);
     });
 
+    if (!extracts.length) return;
+
     vocabulary.push(...sort(extracts));
     callback();
   }
 
   function fillWords() {
-    // const reGen = / (f|m|n|pl|mf|mfn)$/;
-    words[0].innerHTML = currentWord[2]; //.replace(reGen, ' <b>$1</b>');
+    words[0].innerHTML = currentWord[2];
     words[1].innerHTML = currentWord[3];
   }
 
