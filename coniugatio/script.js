@@ -58,8 +58,8 @@
       el.parentNode.removeAttribute('data-valid');
     });
 
-    currentWord[5].forEach((x, i) => clearValue(fields[0][i]));
-    currentWord[6].forEach((x, i) => clearValue(fields[1][i]));
+    currentWord[5].forEach((x, i) => x && clearValue(fields[0][i]));
+    currentWord[6].forEach((x, i) => x && clearValue(fields[1][i]));
 
     table2.remove();
     isAnswersShown = false;
