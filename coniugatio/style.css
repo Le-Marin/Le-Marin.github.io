@@ -1,0 +1,38 @@
+optgroup {
+  text-align: center;
+}
+option {
+  text-align: left;
+}
+
+.case {
+  width: 4rem;
+  min-width: auto;
+  background-color: #eee;
+  border: 1px solid gray;
+  border-radius: .4rem;
+  cursor: pointer;
+}
+.case.__disabled {
+  color: #777;
+  background-color: #ccc;
+}
+
+.x-vowel {
+  color: brown;
+}
+.x-suffix {
+  color: royalblue;
+}
+.x-joint {
+  color: darkorange;
+}
+.x-ending {
+  font-weight: bold;
+}
+.x-compound,
+.t-9 > span,
+.t-11 > span {
+  font-weight: normal;
+  color: #398467;
+}

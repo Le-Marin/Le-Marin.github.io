@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coniugátió</title>
   <link rel="icon" href="#">
-  <link rel="stylesheet" href="../declinatio/style.css?v=3">
-  <style>optgroup {text-align: center;} option {text-align: left;}</style>
-  <script src="vocabulary.js?v=3"></script>
-  <script src="script.js?v=3" defer></script>
+  <link rel="stylesheet" href="../declinatio/style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=1">
+  <script src="vocabulary.js?v=4"></script>
+  <script src="script.js?v=4" defer></script>
 </head>
 <body>
   <div id="root">
     <div class="keyboard">
+      <button class="case" title="Vócálés longae">Ā</button>
       <div class="keyboard__switcher"></div>
       <div class="keyboard__body">
         <div class="keyboard__line">
@@ -28,6 +29,7 @@
     <div class="block select">
       Coniugátió:
       <select class="select-conjugation">
+        <option value="r">forte</option>
         <option value="I">I</option>
         <option value="II">II</option>
         <option value="III a">III a</option>
@@ -56,7 +58,7 @@
           <option value="15">fut act</option>
           <option value="16">fut pass</option>
         </optgroup>
-        <optgroup label="coniúnctívus">
+        <!-- <optgroup label="coniúnctívus">
           <option value="17">praes act</option>
           <option value="18">praes pass</option>
           <option value="19">imprf act</option>
@@ -66,7 +68,7 @@
           <option value="22">prf pass</option>
           <option value="23">pprf act</option>
           <option value="24">pprf pass</option>
-        </optgroup>
+        </optgroup> -->
       </select>
       <button class="get">Generáre</button>
     </div>
