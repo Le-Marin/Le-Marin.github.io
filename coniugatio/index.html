@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coniugátió</title>
-  <link rel="icon" href="#">
-  <link rel="stylesheet" href="../declinatio/style.css?v=4">
-  <link rel="stylesheet" href="style.css?v=1">
-  <script src="vocabulary.js?v=4"></script>
-  <script src="script.js?v=4" defer></script>
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="stylesheet" href="../declinatio/style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=3">
+  <script src="vocabulary.js?v=5"></script>
+  <script src="create.js?v=1"></script>
+  <script src="script.js?v=5" defer></script>
 </head>
 <body>
   <div id="root">
@@ -58,19 +59,19 @@
           <option value="15">fut act</option>
           <option value="16">fut pass</option>
         </optgroup>
-        <!-- <optgroup label="coniúnctívus">
-          <option value="17">praes act</option>
-          <option value="18">praes pass</option>
-          <option value="19">imprf act</option>
-          <option value="20">imprf pass</option>
+        <optgroup label="coniúnctívus">
+          <option disabled value="17">praes act</option>
+          <option disabled value="18">praes pass</option>
+          <option disabled value="19">imprf act</option>
+          <option disabled value="20">imprf pass</option>
           <option disabled>———————</option>
-          <option value="21">prf act</option>
-          <option value="22">prf pass</option>
-          <option value="23">pprf act</option>
-          <option value="24">pprf pass</option>
-        </optgroup> -->
+          <option disabled value="21">prf act</option>
+          <option disabled value="22">prf pass</option>
+          <option disabled value="23">pprf act</option>
+          <option disabled value="24">pprf pass</option>
+        </optgroup>
       </select>
-      <button class="get">Generáre</button>
+      <button class="get"><span>Generáre</span></button>
     </div>
     <div class="block words">
       <div class="word">vocábulum</div>
@@ -101,5 +102,6 @@
       <button class="answers">Respónsa</button>
     </div>
   </div>
+  <script src="../footer.js"></script>
 </body>
 </html>

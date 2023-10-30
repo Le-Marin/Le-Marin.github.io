@@ -36,3 +36,15 @@ option {
   font-weight: normal;
   color: #398467;
 }
+
+@media screen and (max-width: 29rem) {
+  .get {
+    min-width: auto;
+  }
+  .get::before {
+    content: "↻";
+  }
+  .get > span {
+    display: none;
+  }
+}
