@@ -58,6 +58,17 @@ button {
   min-width: 5.5em;
   cursor: pointer;
 }
+.case {
+  width: 4rem;
+  min-width: auto;
+  background-color: #eee;
+  border: 1px solid gray;
+  border-radius: .4rem;
+}
+.case.__disabled {
+  color: #777;
+  background-color: #ccc;
+}
 .words {
   flex-wrap: wrap;
   column-gap: 2em;
