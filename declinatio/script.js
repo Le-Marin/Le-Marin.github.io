@@ -53,7 +53,6 @@
     currentWord[3].forEach((x, i) => clearValue(fields[0][i]));
     currentWord[4].forEach((x, i) => clearValue(fields[1][i]));
 
-    table2.classList.toggle('no-vocative', currentWord[3].length < qnt);
     table2.remove();
     isAnswersShown = false;
 
@@ -106,7 +105,9 @@
         return dataset.valid = 0;
       }
 
-      if (chunks.length > 1 && value.includes(' ')) {
+      const test = chunks.length === 2 && value.includes(' ');
+
+      if (test && !chunks.every(x => x.includes(' '))) {
         const key = +!chunks[0].includes(' ');
         const res = [chunks[key].split(' ')[key], chunks[1 - key]];
         chunks[1 - key] = (key ? res.reverse() : res).join(' ');

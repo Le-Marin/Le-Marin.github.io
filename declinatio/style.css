@@ -12,6 +12,9 @@
   margin: 0;
   box-sizing: border-box;
 }
+[hidden] {
+  display: none !important;
+}
 body {
   font-family: var(--font-main);
   font-size: 1.8rem;
@@ -34,7 +37,6 @@ body::before {
   opacity: 0.125;
 }
 #root {
-  flex: 1;
   max-width: 60rem;
   position: relative;
   padding: 1rem;
@@ -157,8 +159,7 @@ button {
 .result .row {
   height: auto;
 }
-.result .row:first-child,
-.result.no-vocative .row:last-child {
+.result .row:first-child {
   display: none;
 }
 div.input {

@@ -507,6 +507,8 @@
   }
 
   function wordFormToObject(form) {
+    if (!form) return null;
+
     const get = (reg) => (form.match(reg) || '')[1] || '';
     const data = getParams(
       get(/\|([^:_^]+)/),

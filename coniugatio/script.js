@@ -120,17 +120,19 @@
       const form = data[i >= qnt ? 'pl' : 'sg'][i % qnt];
       const value = getInflection(form, data.root).toLowerCase();
       const chunks = value.split('/');
-      const isValid = chunks.some(x => x === userValue);
 
-      if (isValid || isCaseSensitive) return dataset.valid = +isValid;
       if (chunks.length === 1 && value.length !== userValue.length) {
         return dataset.valid = 0;
       }
 
+      const isValid = chunks.some(x => x === userValue);
+
+      if (isValid || isCaseSensitive) return dataset.valid = +isValid;
+
       dataset.valid = +chunks.some(value => {
-        for (let c = 0; c < value.length; c++) {
-          let a = value[c];
-          let b = userValue[c];
+        for (let i = 0; i < value.length; i++) {
+          let a = value[i];
+          let b = userValue[i];
 
           if (a in cases) {
             a = cases[a];
