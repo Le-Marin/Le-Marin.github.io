@@ -26,12 +26,7 @@ const VOCABULARY = [
   ['III a', 'veh~ō vex~ī vect~um -ere', 'carry, convey / нести, везти'],
   ['III a', 'vert~ō vers~ī vers~um -ere', 'turn / вертеть, поворачивать'],
   ['III a', 'em~ō ēm~ī ēmpt~um -ere', 'buy / покупать'],
-  ['III a', 'dūc~ō dūx~ī duct~um -ere', 'lead / вести', {
-    13: [
-      ['', 'dūc', ''],
-      ['', 'dūc|i_te', ''],
-    ],
-  }],
+  ['III a', 'dūc~ō dūx~ī duct~um -ere', 'lead / вести'],
   ['III a', 'crēd~ō crēdid~ī -itum -ere', 'believe / верить'],
   ['III a', 'lūd~ō lūs~ī lūs~um -ere', 'play / играть'],
   ['III a', 'toll~ō sustul~ī sublāt~um -ere', 'lift, raise / поднимать'],
@@ -49,10 +44,6 @@ const VOCABULARY = [
     6: [
       ['fī^a_m', 'fī^ē_s', 'fī^e_t'],
       ['fī^ē_mus', 'fī^ē_tis', 'fī^e_nt'],
-    ],
-    13: [
-      ['', 'fac', ''],
-      ['', 'fac|i_te', ''],
     ],
   }],
   ['III b', 'cap~iō cēp~ī capt~um -ere', 'take, take hold of / брать, хватать'],

@@ -6,20 +6,25 @@ option {
 }
 
 .x-vowel {
-  color: brown;
+  color: #c41414;
+  display: inline-block;
 }
 .x-suffix {
   color: royalblue;
+  display: inline-block;
 }
 .x-joint {
-  color: darkorange;
+  color: #dc7900;
+  display: inline-block;
 }
 .x-ending {
   font-weight: bold;
+  display: inline-block;
 }
 .x-compound,
 .t-9 > span,
-.t-11 > span {
+.t-11 > span,
+.t-21 > span {
   font-weight: normal;
   color: #398467;
 }
