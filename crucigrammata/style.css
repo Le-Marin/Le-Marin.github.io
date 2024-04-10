@@ -21,6 +21,7 @@ body {
   font-size: 5rem;
   min-height: 100vh;
   position: relative;
+  background-color: inherit;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -176,15 +177,31 @@ body {
   width: 8em;
   height: 4em;
   position: absolute;
-  left: var(--x);
-  top: var(--y);
+  left: 0;
+  top: 0;
   background: url("sprite.jpg") no-repeat var(--bgx) var(--bgy) / 500% auto;
   outline: 2px solid black;
   outline-offset: -2px;
+  pointer-events: none;
+  visibility: hidden;
   z-index: 5;
 }
-#tip[hidden] {
-  display: none;
+#tip.__shown {
+  left: var(--x);
+  top: var(--y);
+  visibility: visible;
+}
+
+#word_input {
+  font-size: 1em;
+  width: 1em;
+  height: 1em;
+  position: fixed;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
 }
 
 @media screen and (min-width: 84rem) and (min-height: 50rem) {

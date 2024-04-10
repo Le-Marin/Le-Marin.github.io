@@ -1,8 +1,12 @@
 let size = 0;
 let timerId = 0;
+
+const TRIGGER_CLASS = '__shown';
+
 const root = document.getElementById('root');
 const rootElem = document.documentElement;
 const target = document.createElement('div');
+const classList = target.classList;
 const setCSS = target.style.setProperty.bind(target.style);
 
 function onTipFocus(e) {
@@ -13,11 +17,7 @@ function onTipFocus(e) {
   if (e.type === 'click') e.stopImmediatePropagation();
   else if (e.type === 'touchstart') {
     document.removeEventListener('scroll', this.hide);
-
-    document.addEventListener('touchend', () => {
-      document.addEventListener('scroll', this.hide);
-      timerId = setTimeout(this.hide, 10);
-    }, { once: true });
+    document.addEventListener('touchend', onTouchEnd, { once: true });
   }
 
   if (timerId) {
@@ -29,10 +29,16 @@ function onTipFocus(e) {
   this.move(trg.parentNode.getBoundingClientRect());
 }
 
+function onTouchEnd() {
+  document.addEventListener('scroll', this.hide);
+  timerId = setTimeout(this.hide, 10);
+}
+
 export default {
   __init__(qnt) {
     size = qnt;
     onTipFocus = onTipFocus.bind(this);
+    onTouchEnd = onTouchEnd.bind(this);
 
     root.addEventListener('mouseover', onTipFocus);
     root.addEventListener('touchstart', onTipFocus);
@@ -40,7 +46,6 @@ export default {
     document.addEventListener('scroll', this.hide);
 
     target.id = 'tip';
-    target.hidden = true;
     root.append(target);
   },
   __die__() {
@@ -55,10 +60,10 @@ export default {
     const w = target.offsetWidth + offset;
     const h = target.offsetHeight + offset;
     const x = right + w >= rootElem.clientWidth
-    ? Math.max(2, left - w)
+    ? Math.max(offset, left - w)
     : right + offset;
     const y = bottom + h >= window.innerHeight
-    ? Math.max(2, top - h)
+    ? Math.max(offset, top - h)
     : bottom + offset;
     setCSS('--x', `${x + window.scrollX >> 0}px`);
     setCSS('--y', `${y + window.scrollY >> 0}px`);
@@ -69,10 +74,10 @@ export default {
     const bgy = (ind / 5 >> 0) / yQnt * 100;
     setCSS('--bgx', `${+bgx.toFixed(3)}%`);
     setCSS('--bgy', `${+bgy.toFixed(3)}%`);
-    target.hidden = false;
+    classList.add(TRIGGER_CLASS);
   },
   hide() {
-    if (target.hidden) return;
-    target.hidden = true;
+    if (!classList.contains(TRIGGER_CLASS)) return;
+    classList.remove(TRIGGER_CLASS);
   }
 };

@@ -48,8 +48,13 @@ function parseNode(html, callback) {
 // ====================
 
 const startTime = Date.now();
+const isMobile = navigator.maxTouchPoints > 0 || 'ontouchstart' in document;
 
 const root = document.getElementById('root');
+const fakeCell = parseNode('<b><i></i></b>').firstChild;
+const wordInput = parseNode(/*html*/`
+  <input id="word_input" type="text" maxlength="0" tabindex="-1">
+`);
 const container = parseNode(/*html*/`
   <div class="crossword-shell">
     <div class="crossword"></div>
@@ -84,14 +89,21 @@ const history = {
 let errorMode = false;
 const keyMatcher = /^Key[A-Z]$/;
 const dirKeys = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
+const inputNode = isMobile ? wordInput : document;
 
 root.addEventListener('click', onHandleClick);
-document.addEventListener('keydown', onKeyDown);
+inputNode.addEventListener('keydown', onKeyDown);
+wordInput.addEventListener('blur', selectCell.bind(null, fakeCell));
 
 function onHandleClick(e) {
   const trg = e.target.closest('.cell');
 
-  if (trg) return selectCell(trg);
+  if (trg) {
+    selectCell(trg);
+    if (isMobile) inputNode.focus();
+    return;
+  }
+
   if (!Word.activeCell) return;
 
   Word.activeCell.classList.remove('__active');
@@ -100,7 +112,7 @@ function onHandleClick(e) {
 }
 
 function onKeyDown(e) {
-  if (e.ctrlKey && !e.altKey && checkHistoryKeys(e.code, e.shiftKey)) return;
+  if (e.ctrlKey && !e.altKey && checkHistoryKeys(e)) return;
   if (!Word.activeCell) return;
 
   const {code} = e;
@@ -126,6 +138,7 @@ function onKeyDown(e) {
   }
 
   if (!keyMatcher.test(code)) return;
+  if (isMobile) e.preventDefault();
 
   const state = [];
   const letter = getLetterByCode(code);
@@ -153,11 +166,17 @@ function onKeyDown(e) {
 
 // ====================
 
-function checkHistoryKeys(code, meta) {
-  const isZKey = code === 'KeyZ';
+function checkHistoryKeys(e) {
+  let isZKey = e.code === 'KeyZ';
 
-  if (!(isZKey || code === 'KeyY')) return;
-  if (meta) return isZKey && checkHistoryKeys('KeyY', false);
+  if (!(isZKey || e.code === 'KeyY')) return;
+
+  if (e.shiftKey) {
+    if (!isZKey) return;
+    isZKey = false;
+  }
+
+  e.preventDefault();
 
   const keys = 'nextprev';
   const key = keys.substr(isZKey * 4, 4);
@@ -221,6 +240,8 @@ function selectCell(cell) {
     Word.activeCell.classList.remove('__active');
     Word.activeCell.parentNode.classList.remove('__active');
   }
+
+  if (cell === fakeCell) return Word.activeCell = null;
 
   Word.activeCell = cell;
 
@@ -301,7 +322,7 @@ function showResult() {
 
   const elem = parseNode(/*html*/`
     <div class="result" data-action="hide">
-      <div class="result__inner" tabindex="-1">
+      <div class="result__inner">
         <button class="result__close" data-action="hide">&times;</button>
         <h3 class="result__heading">macte virtvte</h3>
         <p>Tempus: <span class="result__time">${hms}</span></p>
@@ -316,17 +337,17 @@ function showResult() {
 
   tip.__die__();
   root.removeEventListener('click', onHandleClick);
-  document.removeEventListener('keydown', onKeyDown);
+  inputNode.removeEventListener('keydown', onKeyDown);
 
-  selectCell(parseNode('<b><i></i></b>').firstChild);
-  Word.activeCell = null;
-
+  selectCell(fakeCell);
   root.append(elem);
-  elem.firstElementChild.focus();
+  elem.firstElementChild.firstElementChild.focus();
 }
 
 // ====================
 
 tip.__init__(words.length);
 Word.__init__(container.firstElementChild, words);
-root.append(container);
+
+if (isMobile) root.append(wordInput, container);
+else root.append(container);
