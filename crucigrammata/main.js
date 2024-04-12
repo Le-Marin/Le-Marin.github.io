@@ -53,7 +53,14 @@ const isMobile = navigator.maxTouchPoints > 0 || 'ontouchstart' in document;
 const root = document.getElementById('root');
 const fakeCell = parseNode('<b><i></i></b>').firstChild;
 const wordInput = parseNode(/*html*/`
-  <input id="word_input" type="text" maxlength="0" tabindex="-1">
+  <textarea
+    id="word_input"
+    autocomplete="off"
+    autocapitalize="off"
+    autocorrect="off"
+    spellcheck="false"
+    tabindex="-1"
+  ></textarea>
 `);
 const container = parseNode(/*html*/`
   <div class="crossword-shell">
@@ -87,20 +94,27 @@ const history = {
 // ====================
 
 let errorMode = false;
-const keyMatcher = /^Key[A-Z]$/;
+const keyMatcher = /^[a-z]$/;
+const codeMatcher = /^Key[A-Z]$/;
 const dirKeys = ['ArrowLeft', 'ArrowUp', 'ArrowRight', 'ArrowDown'];
-const inputNode = isMobile ? wordInput : document;
 
 root.addEventListener('click', onHandleClick);
-inputNode.addEventListener('keydown', onKeyDown);
-wordInput.addEventListener('blur', selectCell.bind(null, fakeCell));
+
+if (!isMobile) {
+  document.addEventListener('keydown', onKeyDown);
+} else {
+  wordInput.addEventListener('beforeinput', onBeforeInput);
+  wordInput.addEventListener('input', clearInput);
+  wordInput.addEventListener('keyup', clearInput);
+  wordInput.addEventListener('blur', onBlur);
+}
 
 function onHandleClick(e) {
   const trg = e.target.closest('.cell');
 
   if (trg) {
     selectCell(trg);
-    if (isMobile) inputNode.focus();
+    if (isMobile) wordInput.focus();
     return;
   }
 
@@ -115,30 +129,31 @@ function onKeyDown(e) {
   if (e.ctrlKey && !e.altKey && checkHistoryKeys(e)) return;
   if (!Word.activeCell) return;
 
-  const {code} = e;
+  const {key} = e;
   const word = Word.find('target', Word.activeElem);
 
-  if (code === 'Space' || code === 'Backspace') {
+  if (key === ' ' || key === 'Backspace') {
     e.preventDefault();
-    return clearCellAndSelectNext(word, code === 'Space');
+    return clearCellAndSelectNext(word, !!key);
   }
 
-  if (code === 'Tab') {
+  if (key === 'Tab') {
     e.preventDefault();
     const ind = (e.shiftKey ? -1 : 1) + word.index;
     const nextWord = Word.all.at(ind % Word.size);
     return selectCell(nextWord.firstEmptyCell || nextWord.firstCell);
   }
 
-  const dir = dirKeys.indexOf(code);
+  const dir = dirKeys.indexOf(key);
 
   if (~dir) {
     e.preventDefault();
     return selectSiblingCell(word, dir);
   }
 
-  if (!keyMatcher.test(code)) return;
-  if (isMobile) e.preventDefault();
+  const code = getKeyCode({key});
+
+  if (!code) return;
 
   const state = [];
   const letter = getLetterByCode(code);
@@ -164,12 +179,64 @@ function onKeyDown(e) {
   if (!Word.hasEmptyCell) checkAll();
 }
 
+function onBeforeInput(e) {
+  const key = e.data && e.data.at(-1);
+  clearInput.call(this);
+
+  if (!Word.activeCell) return;
+
+  if (key === ' ' || e.inputType === 'deleteContentBackward') {
+    const word = Word.find('target', Word.activeElem);
+    return clearCellAndSelectNext(word, !!key);
+  }
+
+  const code = getKeyCode({key});
+
+  if (!code) return;
+
+  const word = Word.find('target', Word.activeElem);
+  const letter = getLetterByCode(code);
+
+  [Word.activeCell, getJointCell(word)].forEach((cell, i) => {
+    if (!cell) return;
+
+    setCellValue(cell, letter);
+
+    if (!errorMode) return;
+    return (i ? Word.find('target', cell.parentNode) : word).check();
+  });
+
+  const ind = Word.activeCellIndex;
+  const predicate = (el, i) => i > ind && !el.textContent;
+  const cell = word.cells.find(predicate) || word.firstEmptyCell;
+
+  selectCell(cell);
+
+  if (!Word.hasEmptyCell) checkAll();
+}
+
+function clearInput() {
+  this.value = '';
+  this.textContent = '';
+}
+
+function onBlur() {
+  clearInput.call(this);
+  selectCell(fakeCell);
+}
+
 // ====================
 
-function checkHistoryKeys(e) {
-  let isZKey = e.code === 'KeyZ';
+const abcd = 'fdultpbqrkvyjghcneawxiosmz';
+const letters = Object.fromEntries(
+  [...'авгдезийклмнопрстуфцчшщыья'].map((x, i) => [x, abcd[i]])
+);
 
-  if (!(isZKey || e.code === 'KeyY')) return;
+function checkHistoryKeys(e) {
+  const code = getKeyCode(e);
+  let isZKey = code === 'z';
+
+  if (!(isZKey || code === 'y')) return;
 
   if (e.shiftKey) {
     if (!isZKey) return;
@@ -295,9 +362,16 @@ function getSiblingCell(dir) {
   return activeCell[propName] = cell;
 }
 
-function getLetterByCode(code) {
-  const k = code.slice(3).toLowerCase();
-  return k === 'u' ? 'v' : k;
+function getKeyCode(e) {
+  const key = `${e.key}`.toLowerCase();
+
+  if (keyMatcher.test(key)) return key;
+  if (letters[key]) return letters[key];
+  if (codeMatcher.test(e.code)) return e.code.slice(3).toLowerCase();
+}
+
+function getLetterByCode(c) {
+  return c === 'u' ? 'v' : c;
 }
 
 function checkAll() {
@@ -335,9 +409,11 @@ function showResult() {
     this.remove();
   });
 
+  if (isMobile) wordInput.remove();
+
   tip.__die__();
   root.removeEventListener('click', onHandleClick);
-  inputNode.removeEventListener('keydown', onKeyDown);
+  document.removeEventListener('keydown', onKeyDown);
 
   selectCell(fakeCell);
   root.append(elem);
