@@ -9,6 +9,7 @@
 }
 body {
   font-size: 1.6rem;
+  background: linear-gradient(-45deg, #cbcabc, #fff) fixed;
   background-color: #ddd;
 }
 
@@ -21,7 +22,6 @@ body {
   font-size: 5rem;
   min-height: 100vh;
   position: relative;
-  background-color: inherit;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
@@ -36,6 +36,36 @@ body {
   animation: showAlert steps(1) 1s forwards;
 }
 
+.heading {
+  font-size: 0.8em;
+  font-weight: normal;
+  width: 100%;
+  position: sticky;
+  left: 0;
+  padding: 0.25em 1rem 2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: #e9bd82;
+  text-shadow: 0 0 2px black,0 0 2px black;
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.5));
+  white-space: nowrap;
+}
+.heading::before,
+.heading::after {
+  --deg: 90deg;
+  content: "";
+  width: 50%;
+  max-width: 4em;
+  height: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0.4em;
+  background-image: linear-gradient(var(--deg), currentColor 40%, transparent);
+}
+.heading::before {
+  --deg: -90deg;
+}
+
 .crossword-shell {
   --w: 22em;
   --h: 13em;
@@ -43,8 +73,8 @@ body {
   left: 0;
   right: 0;
   top: 0.4rem;
-  top: max(0.4rem, 50% - var(--h) / 2);
-  padding: 2px;
+  top: max(0em, 50% - var(--h) / 2 - 2.4em);
+  padding: 2px 0.3em 0.3em;
   overflow-x: auto;
   scrollbar-width: thin;
 }
@@ -54,6 +84,19 @@ body {
   height: var(--h);
   position: relative;
   margin: 0 auto;
+}
+.crossword::before {
+  --s: 6em;
+  content: "";
+  width: var(--s);
+  height: calc(var(--s) / 1);
+  position: absolute;
+  right: -0.25em;
+  top: -1.5em;
+  background: url("https://le-marin.github.io/LLPSI/img/spqr.png") no-repeat right / contain;
+  pointer-events: none;
+  opacity: 0.125;
+  z-index: -1;
 }
 .word {
   position: absolute;
@@ -179,7 +222,7 @@ body {
   position: absolute;
   left: 0;
   top: 0;
-  background: url("sprite.jpg") no-repeat var(--bgx) var(--bgy) / 500% auto;
+  background: no-repeat var(--bgx) var(--bgy) / 500% auto;
   outline: 2px solid black;
   outline-offset: -2px;
   pointer-events: none;
@@ -214,28 +257,37 @@ body {
     font-size: 6rem;
   }
 }
-@media screen and (max-width: 70.5rem), screen and (max-height: 41.5rem) {
+@media screen and (max-width: 72rem), screen and (max-height: 41.5rem) {
   #root {
     font-size: 4.5rem;
   }
 }
-@media screen and (max-width: 63.5rem), screen and (max-height: 37.5rem) {
+@media screen and (max-width: 65rem), screen and (max-height: 37.5rem) {
   #root {
     font-size: 4rem;
   }
 }
-@media screen and (max-width: 56.25rem), screen and (max-height: 33.5rem) {
+@media screen and (max-width: 57.75rem), screen and (max-height: 33.5rem) {
   #root {
     font-size: 3.5rem;
   }
 }
-@media screen and (max-width: 49.5rem), screen and (max-height: 29.5rem) {
+@media screen and (max-width: 51rem), screen and (max-height: 29.5rem) {
   #root {
     font-size: 3.2rem;
   }
 }
-@media screen and (max-width: 45.25rem), screen and (max-height: 26.75rem) {
+@media screen and (max-width: 46.75rem), screen and (max-height: 26.75rem) {
   #root {
     font-size: 3rem;
+  }
+}
+@media screen and (display-mode: fullscreen) {
+  .heading,
+  .crossword::before {
+    display: none;
+  }
+  .crossword-shell {
+    top: max(0.4rem, 50% - var(--h) / 2);
   }
 }

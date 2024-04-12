@@ -64,6 +64,7 @@ const wordInput = parseNode(/*html*/`
 `);
 const container = parseNode(/*html*/`
   <div class="crossword-shell">
+    <h1 class="heading">ad cap i—v</h1>
     <div class="crossword"></div>
   </div>
 `);
@@ -134,7 +135,7 @@ function onKeyDown(e) {
 
   if (key === ' ' || key === 'Backspace') {
     e.preventDefault();
-    return clearCellAndSelectNext(word, !!key);
+    return clearCellAndSelectNext(word, key === ' ');
   }
 
   if (key === 'Tab') {
@@ -187,7 +188,7 @@ function onBeforeInput(e) {
 
   if (key === ' ' || e.inputType === 'deleteContentBackward') {
     const word = Word.find('target', Word.activeElem);
-    return clearCellAndSelectNext(word, !!key);
+    return clearCellAndSelectNext(word, key === ' ');
   }
 
   const code = getKeyCode({key});
@@ -423,7 +424,7 @@ function showResult() {
 // ====================
 
 tip.__init__(words.length);
-Word.__init__(container.firstElementChild, words);
+Word.__init__(container.lastElementChild, words);
 
 if (isMobile) root.append(wordInput, container);
 else root.append(container);
