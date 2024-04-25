@@ -1,46 +1,18 @@
-import tip from './tip.js';
-import Word from './word.js';
+import tip from './tip.js?v=1';
+import Word from './word.js?v=1';
+
+const words = JSON.parse(document.getElementById('w').text);
 
 [...document.scripts].forEach(el => el.remove());
 
-const words = [
-  ['implvvivm', [0, 0], 1],
-  ['femina', [12, 0], 1],
-  ['atrivm', [7, 2], 1],
-  ['mensa', [16, 2], 1],
-  ['lilivm', [12, 4], 1],
-  ['ancilla', [0, 5], 1],
-  ['verba', [8, 6], 1],
-  ['pvella', [16, 7], 1],
-  ['hortvs', [0, 8], 1],
-  ['fenestra', [7, 8], 1],
-  ['pater', [0, 10], 1],
-  ['scaena', [9, 10], 1],
-  ['vocabvla', [0, 12], 1],
-  ['servvs', [9, 12], 1],
-  ['ostivm', [16, 12], 1],
-
-  ['insvla', [0, 0]],
-  ['liberi', [3, 0]],
-  ['mater', [8, 0]],
-  ['familia', [12, 0]],
-  ['nvmmvs', [16, 0]],
-  ['filivs', [5, 3]],
-  ['litterae', [10, 1]],
-  ['syllaba', [14, 2]],
-  ['pver', [17, 6]],
-  ['saccvlvs', [19, 2]],
-  ['rosa', [1, 7]],
-  ['vir', [4, 8]],
-  ['filia', [7, 8]],
-  ['nasvs', [9, 8]],
-  ['bacvlvm', [21, 6]],
-];
+document.head.appendChild(
+  parseNode('<style>#tip { background-image: url("sprite.jpg?v=1"); }</style>')
+);
 
 function parseNode(html, callback) {
   let elem = document.createElement('div');
   elem.innerHTML = html;
-  elem = elem.firstElementChild.cloneNode(true);
+  elem = elem.firstElementChild;
   callback && callback.call(elem, elem);
   return elem;
 }
@@ -64,7 +36,7 @@ const wordInput = parseNode(/*html*/`
 `);
 const container = parseNode(/*html*/`
   <div class="crossword-shell">
-    <h1 class="heading">ad cap i—v</h1>
+    <h1 class="heading">ad cap ${document.title.slice(15)}</h1>
     <div class="crossword"></div>
   </div>
 `);
@@ -111,19 +83,15 @@ if (!isMobile) {
 }
 
 function onHandleClick(e) {
-  const trg = e.target.closest('.cell');
+  const cell = e.target.closest('.cell');
 
-  if (trg) {
-    selectCell(trg);
+  if (cell) {
+    selectCell(cell);
     if (isMobile) wordInput.focus();
     return;
   }
 
-  if (!Word.activeCell) return;
-
-  Word.activeCell.classList.remove('__active');
-  Word.activeCell.parentNode.classList.remove('__active');
-  Word.activeCell = null;
+  if (Word.activeCell) selectCell(fakeCell);
 }
 
 function onKeyDown(e) {
@@ -131,15 +99,16 @@ function onKeyDown(e) {
   if (!Word.activeCell) return;
 
   const {key} = e;
-  const word = Word.find('target', Word.activeElem);
 
   if (key === ' ' || key === 'Backspace') {
     e.preventDefault();
+    const word = Word.find('target', Word.activeElem);
     return clearCellAndSelectNext(word, key === ' ');
   }
 
   if (key === 'Tab') {
     e.preventDefault();
+    const word = Word.find('target', Word.activeElem);
     const ind = (e.shiftKey ? -1 : 1) + word.index;
     const nextWord = Word.all.at(ind % Word.size);
     return selectCell(nextWord.firstEmptyCell || nextWord.firstCell);
@@ -149,27 +118,33 @@ function onKeyDown(e) {
 
   if (~dir) {
     e.preventDefault();
+    const word = Word.find('target', Word.activeElem);
     return selectSiblingCell(word, dir);
   }
 
+  printLetter(key);
+}
+
+function printLetter(key, isInputEvent) {
   const code = getKeyCode({key});
 
   if (!code) return;
 
-  const state = [];
+  const word = Word.find('target', Word.activeElem);
+  const state = isInputEvent ? null : [];
   const letter = getLetterByCode(code);
 
   [Word.activeCell, getJointCell(word)].forEach((cell, i) => {
     if (!cell) return;
 
-    state.push([cell, cell.textContent, letter]);
+    if (state) state.push([cell, cell.textContent, letter]);
     setCellValue(cell, letter);
 
     if (!errorMode) return;
     return (i ? Word.find('target', cell.parentNode) : word).check();
   });
 
-  history.push(state);
+  if (state) history.push(state);
 
   const ind = Word.activeCellIndex;
   const predicate = (el, i) => i > ind && !el.textContent;
@@ -191,29 +166,7 @@ function onBeforeInput(e) {
     return clearCellAndSelectNext(word, key === ' ');
   }
 
-  const code = getKeyCode({key});
-
-  if (!code) return;
-
-  const word = Word.find('target', Word.activeElem);
-  const letter = getLetterByCode(code);
-
-  [Word.activeCell, getJointCell(word)].forEach((cell, i) => {
-    if (!cell) return;
-
-    setCellValue(cell, letter);
-
-    if (!errorMode) return;
-    return (i ? Word.find('target', cell.parentNode) : word).check();
-  });
-
-  const ind = Word.activeCellIndex;
-  const predicate = (el, i) => i > ind && !el.textContent;
-  const cell = word.cells.find(predicate) || word.firstEmptyCell;
-
-  selectCell(cell);
-
-  if (!Word.hasEmptyCell) checkAll();
+  printLetter(key, true);
 }
 
 function clearInput() {
@@ -306,7 +259,7 @@ function selectCell(cell) {
 
   if (Word.activeCell) {
     Word.activeCell.classList.remove('__active');
-    Word.activeCell.parentNode.classList.remove('__active');
+    Word.activeElem.classList.remove('__active');
   }
 
   if (cell === fakeCell) return Word.activeCell = null;

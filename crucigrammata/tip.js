@@ -1,4 +1,5 @@
 let size = 0;
+let yQnt = 0;
 let timerId = 0;
 
 const TRIGGER_CLASS = '__shown';
@@ -37,6 +38,7 @@ function onTouchEnd() {
 export default {
   __init__(qnt) {
     size = qnt;
+    yQnt = Math.ceil(qnt / 5) - 1;
     onTipFocus = onTipFocus.bind(this);
     onTouchEnd = onTouchEnd.bind(this);
 
@@ -60,16 +62,15 @@ export default {
     const w = target.offsetWidth + offset;
     const h = target.offsetHeight + offset;
     const x = right + w >= rootElem.clientWidth
-    ? Math.max(offset, left - w)
-    : right + offset;
+      ? Math.max(offset, left - w)
+      : right + offset;
     const y = bottom + h >= window.innerHeight
-    ? Math.max(offset, top - h)
-    : bottom + offset;
+      ? Math.max(offset, top - h)
+      : bottom + offset;
     setCSS('--x', `${x + window.scrollX >> 0}px`);
     setCSS('--y', `${y + window.scrollY >> 0}px`);
   },
   render(ind) {
-    const yQnt = size / 5 - 1;
     const bgx = (ind % 5) / 4 * 100;
     const bgy = (ind / 5 >> 0) / yQnt * 100;
     setCSS('--bgx', `${+bgx.toFixed(3)}%`);
