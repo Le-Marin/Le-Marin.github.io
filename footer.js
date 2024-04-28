@@ -1,6 +1,8 @@
 (function() {
   'use strict';
 
+  if (document.getElementById('footer')) return;
+
   const css = /*css*/`
     body {
       min-height: 100vh;
@@ -20,6 +22,7 @@
       bottom: 0;
       padding: 0 1rem;
       background: linear-gradient(90deg, transparent, #f4f4f4 30% 70%, transparent);
+      z-index: 20;
     }
     #footer::before {
       content: "";
