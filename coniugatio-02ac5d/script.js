@@ -180,6 +180,8 @@
       if (isValid || isCaseSensitive) return dataset.valid = +isValid;
 
       dataset.valid = +chunks.some(value => {
+        if (value.length !== userValue.length) return;
+
         for (let i = 0; i < value.length; i++) {
           let a = value[i];
           let b = userValue[i];
@@ -265,7 +267,7 @@
 
   const keyboard = (function() {
     const target = $('.keyboard');
-    const body = target.lastElementChild;
+    const [caseSwitcher, trigger, body] = target.children;
 
     return {
       __init__() {
@@ -275,8 +277,11 @@
       onHandleClick(e) {
         const trg = e.target;
 
-        if (trg.matches('.keyboard__switcher'))
+        if (trg === trigger)
           return this.toggle();
+
+        if (trg === caseSwitcher)
+          return btnCheck.click();
 
         if (trg.matches('.keyboard__key'))
           return this.printKey(trg.textContent, e.shiftKey);

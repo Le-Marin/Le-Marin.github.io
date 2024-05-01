@@ -21,7 +21,12 @@
   const btnAnswers = btnCheck.nextElementSibling;
   const words = $('.words').children;
   const table = $('.table');
-  const table2 = table.cloneNode(true);
+
+  const table2 = table.cloneNode();
+  table2.classList.add('result');
+  table2.innerHTML = table.innerHTML
+    .replace(/<input.+?>/g, '<div class="input"></div>');
+
   const inputs = $$('.input', table);
   const inputs2 = $$('.input', table2);
   const qnt = inputs.length / 2;
@@ -30,20 +35,29 @@
   let currentWord = null;
   let isAnswersShown = false;
 
+  select1.addEventListener('wheel', onSelectWheel);
+  select2.addEventListener('wheel', onSelectWheel);
+
+  function onSelectWheel(e) {
+    e.preventDefault();
+
+    const s = e.deltaY > 0 ? 1 : -1;
+    const options = [...this.options];
+    const getNext = (i) => options[s + i] || options.at(-1 + (s === 1));
+    let next = getNext(this.selectedIndex);
+
+    while (next.disabled) next = getNext(next.index);
+
+    next.selected = true;
+    btnGet.click();
+  }
+
   const getInflection = (form, root) => {
     if (!form) return '';
 
     const {vowel, suffix, joint, ending} = form;
     return (form.root || root) + vowel + suffix + joint + ending;
   };
-
-  table2.classList.add('result');
-  inputs2.forEach((el, i) => {
-    const div = document.createElement('div');
-    div.className = el.className;
-    el.replaceWith(div);
-    inputs2[i] = div;
-  });
 
   btnGet.addEventListener('click', function() {
     if (currentWord) {
@@ -100,7 +114,9 @@
   const btnCase = $('.case');
   const cases = {'ā': 'a', 'ē': 'e', 'ī': 'i', 'ō': 'o', 'ū': 'u', 'ȳ': 'y'};
 
-  btnCase.addEventListener('click', () => btnCase.classList.toggle('__disabled'));
+  btnCase.addEventListener('click', function() {
+    this.classList.toggle('__disabled');
+  });
 
   btnCheck.addEventListener('click', function() {
     if (!currentWord) return;
@@ -130,6 +146,8 @@
       if (isValid || isCaseSensitive) return dataset.valid = +isValid;
 
       dataset.valid = +chunks.some(value => {
+        if (value.length !== userValue.length) return;
+
         for (let i = 0; i < value.length; i++) {
           let a = value[i];
           let b = userValue[i];
@@ -171,7 +189,7 @@
 
   const keyboard = (function() {
     const target = $('.keyboard');
-    const body = target.lastElementChild;
+    const [caseSwitcher, trigger, body] = target.children;
 
     return {
       __init__() {
@@ -181,8 +199,11 @@
       onHandleClick(e) {
         const trg = e.target;
 
-        if (trg.matches('.keyboard__switcher'))
+        if (trg === trigger)
           return this.toggle();
+
+        if (trg === caseSwitcher)
+          return btnCheck.click();
 
         if (trg.matches('.keyboard__key'))
           return this.printKey(trg.textContent, e.shiftKey);
