@@ -68,7 +68,7 @@ export default {
       ? Math.max(offset, top - h)
       : bottom + offset;
     setCSS('--x', `${x + window.scrollX >> 0}px`);
-    setCSS('--y', `${y + window.scrollY >> 0}px`);
+    setCSS('--y', `${y - root.offsetTop + window.scrollY >> 0}px`);
   },
   render(ind) {
     const bgx = (ind % 5) / 4 * 100;

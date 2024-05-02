@@ -1,20 +1,14 @@
-import tip from './tip.js?v=1';
-import Word from './word.js?v=1';
+import tip from './tip.js?v=2';
+import Word from './word.js?v=2';
 
 const words = JSON.parse(document.getElementById('w').text);
 
 [...document.scripts].forEach(el => el.remove());
 
-document.head.appendChild(
-  parseNode('<style>#tip { background-image: url("sprite.jpg?v=1"); }</style>')
-);
-
-function parseNode(html, callback) {
-  let elem = document.createElement('div');
+function parseNode(html) {
+  const elem = document.createElement('div');
   elem.innerHTML = html;
-  elem = elem.firstElementChild;
-  callback && callback.call(elem, elem);
-  return elem;
+  return elem.firstElementChild;
 }
 
 // ====================
@@ -23,6 +17,7 @@ const startTime = Date.now();
 const isMobile = navigator.maxTouchPoints > 0 || 'ontouchstart' in document;
 
 const root = document.getElementById('root');
+const container = root.firstElementChild;
 const fakeCell = parseNode('<b><i></i></b>').firstChild;
 const wordInput = parseNode(/*html*/`
   <textarea
@@ -33,12 +28,6 @@ const wordInput = parseNode(/*html*/`
     spellcheck="false"
     tabindex="-1"
   ></textarea>
-`);
-const container = parseNode(/*html*/`
-  <div class="crossword-shell">
-    <h1 class="heading">ad cap ${document.title.slice(15)}</h1>
-    <div class="crossword"></div>
-  </div>
 `);
 
 // ====================
@@ -156,10 +145,11 @@ function printLetter(key, isInputEvent) {
 }
 
 function onBeforeInput(e) {
-  const key = e.data && e.data.at(-1);
   clearInput.call(this);
 
   if (!Word.activeCell) return;
+
+  const key = e.data && e.data.at(-1);
 
   if (key === ' ' || e.inputType === 'deleteContentBackward') {
     const word = Word.find('target', Word.activeElem);
@@ -268,6 +258,8 @@ function selectCell(cell) {
 
   cell.classList.add('__active');
   cell.parentNode.classList.add('__active');
+
+  if (cell.scrollIntoViewIfNeeded) cell.scrollIntoViewIfNeeded();
 }
 
 function getJointCell(word) {
@@ -379,5 +371,4 @@ function showResult() {
 tip.__init__(words.length);
 Word.__init__(container.lastElementChild, words);
 
-if (isMobile) root.append(wordInput, container);
-else root.append(container);
+if (isMobile) root.append(wordInput);
