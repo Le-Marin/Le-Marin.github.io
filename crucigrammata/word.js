@@ -5,7 +5,7 @@ const allWords = [];
 const allCells = [];
 
 const trimReg = /\s+/g;
-const cellTemplate = '<div class="cell"><span class="cell__lit"></span></div>';
+const cellTemplate = '<div class="cell"><div class="cell__lit"></div></div>';
 
 export default class Word {
   constructor(target, value, index, isHorizontal) {
@@ -29,11 +29,11 @@ export default class Word {
     return word;
   }
   static create(size, ind, x, y, isHorizontal) {
-    const indexTemplate = `<i class="cell__index" data-index="${ind}"></i>$&`;
+    const indexTemplate = `$&<i class="cell__index" data-index="${ind}"></i>`;
     const elem = document.createElement('div');
     elem.style = `left: ${x}em; top: ${y}em;`;
     elem.className = 'word' + (isHorizontal ? ' __h' : '');
-    elem.innerHTML = cellTemplate.repeat(size).replace('</d', indexTemplate);
+    elem.innerHTML = cellTemplate.repeat(size).replace('</div>', indexTemplate);
     return elem;
   }
   static find(key, value) {

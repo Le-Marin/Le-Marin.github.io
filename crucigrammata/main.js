@@ -1,5 +1,5 @@
-import tip from './tip.js?v=2';
-import Word from './word.js?v=2';
+import tip from './tip.js?v=3';
+import Word from './word.js?v=3';
 
 const words = JSON.parse(document.getElementById('w').text);
 

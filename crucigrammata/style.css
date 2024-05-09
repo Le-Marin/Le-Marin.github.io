@@ -131,7 +131,6 @@ body:has(#footer) > #root {
   text-align: center;
   text-transform: uppercase;
   background-color: inherit;
-  outline: 1px solid #666;
 }
 .cell:hover {
   background-color: #ffa;
@@ -155,10 +154,12 @@ body:has(#footer) > #root {
 }
 .cell__lit {
   font-size: 0.32em;
+  height: 100%;
   display: block;
   position: relative;
+  background-color: inherit;
+  outline: 1px solid #666;
   pointer-events: none;
-  z-index: 3;
 }
 .cell__index::after {
   content: counter(words-v);
@@ -208,7 +209,7 @@ body:has(#footer) > #root {
   background-color: white;
   border: 2px solid gray;
   outline: 2px solid #333;
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
 }
 .result__close {
   position: absolute;
